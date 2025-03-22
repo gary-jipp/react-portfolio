@@ -27,12 +27,6 @@ const socials = [
   },
 ];
 
-
-{/* <NavItem href="#" onClick={handleClick("landing")} icon={faHome} text="Home" />
-<NavItem href="#project-section" onClick={handleClick("projects")} icon={faToolbox} text="Projects" />
-<NavItem href="#contactme-section" onClick={handleClick("contactme")} icon={faEnvelope} text="Context me" />;
- */}
-
 const internals = [
   {
     anchor: "home",
@@ -90,14 +84,14 @@ const Header = function() {
     </a>
   ));
 
-  // // Create list of Internal links
-  // const listList = internals.map((item) => (
-  //   <NavItem
-  //     href={item.path}
-  //     onClick={handleClick(item.anchor)}
-  //     icon={item.icon}
-  //     text={item.text} />
-  // ));
+  // Create list of Internal links
+  const listList = internals.map((item) => (
+    <NavItem key={item.path}
+      href={item.path}
+      onClick={handleClick(item.anchor)}
+      icon={item.icon}
+      text={item.text} />
+  ));
 
   return (
     <Box
@@ -112,12 +106,7 @@ const Header = function() {
       backgroundColor="#18181b"
     >
       <Box color="white" maxWidth="1280px" margin="0 auto">
-        <HStack
-          px={16}
-          py={4}
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <HStack px={16} py={4} justifyContent="space-between" alignItems="center">
           <nav>
             {/* Add social media links based on the `socials` data */}
             <HStack spacing={8} // color={!isHeaderVisible ? "transparent" : "#2A4365"}
@@ -125,13 +114,10 @@ const Header = function() {
               {socialList}
             </HStack>
           </nav>
-
           <nav>
             <HStack spacing={8}>
               {/* Add links to Projects and Contact me section */}
-              <NavItem href="#" onClick={handleClick("landing")} icon={faHome} text="Home" />
-              <NavItem href="#project-section" onClick={handleClick("projects")} icon={faToolbox} text="Projects" />
-              <NavItem href="#contactme-section" onClick={handleClick("contactme")} icon={faEnvelope} text="Context me" />
+              {listList}
             </HStack>
           </nav>
 
