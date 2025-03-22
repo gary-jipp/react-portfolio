@@ -1,6 +1,6 @@
 import {useEffect, useRef} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faHome,  faToolbox} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faHome, faToolbox} from "@fortawesome/free-solid-svg-icons";
 import {faGithub, faLinkedin, faMedium, faStackOverflow} from "@fortawesome/free-brands-svg-icons";
 import {Text, Box, HStack} from "@chakra-ui/react";
 
@@ -27,12 +27,40 @@ const socials = [
   },
 ];
 
+
+{/* <NavItem href="#" onClick={handleClick("landing")} icon={faHome} text="Home" />
+<NavItem href="#project-section" onClick={handleClick("projects")} icon={faToolbox} text="Projects" />
+<NavItem href="#contactme-section" onClick={handleClick("contactme")} icon={faEnvelope} text="Context me" />;
+ */}
+
+const internals = [
+  {
+    anchor: "home",
+    icon: faHome,
+    path: "#",
+    text: "Home",
+  },
+  {
+    anchor: "projects",
+    icon: faToolbox,
+    path: "#project-section",
+    text: "Projects",
+  },
+  {
+    anchor: "contactme",
+    icon: faEnvelope,
+    path: "#contactme-section",
+    text: "Context me",
+  },
+];
+
+
 const NavItem = function(props) {
   return (
     <>
       <a href={props.href} onClick={props.onClick}>
         <HStack>
-          <FontAwesomeIcon icon={props.icon} size="lg" />
+          {/* <FontAwesomeIcon icon={props.icon} size="lg" /> */}
           <Text fontSize={14} fontWeight="bold">
             {props.text}
           </Text>
@@ -55,11 +83,21 @@ const Header = function() {
     }
   };
 
+  // Create list of Social Network links
   const socialList = socials.map((social) => (
     <a href={social.url} key={social.url}>
       <FontAwesomeIcon icon={social.icon} size="2x" />
     </a>
   ));
+
+  // // Create list of Internal links
+  // const listList = internals.map((item) => (
+  //   <NavItem
+  //     href={item.path}
+  //     onClick={handleClick(item.anchor)}
+  //     icon={item.icon}
+  //     text={item.text} />
+  // ));
 
   return (
     <Box
