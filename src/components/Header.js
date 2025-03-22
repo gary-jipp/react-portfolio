@@ -1,6 +1,6 @@
 import {useEffect, useRef} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faHome, faBriefcase} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faHome,  faToolbox} from "@fortawesome/free-solid-svg-icons";
 import {faGithub, faLinkedin, faMedium, faStackOverflow} from "@fortawesome/free-brands-svg-icons";
 import {Text, Box, HStack} from "@chakra-ui/react";
 
@@ -27,8 +27,24 @@ const socials = [
   },
 ];
 
-const Header = () => {
-  const handleClick = (anchor) => () => {
+const NavItem = function(props) {
+  return (
+    <>
+      <a href={props.href} onClick={props.onClick}>
+        <HStack>
+          <FontAwesomeIcon icon={props.icon} size="lg" />
+          <Text fontSize={14} fontWeight="bold">
+            {props.text}
+          </Text>
+        </HStack>
+      </a>
+    </>
+  );
+};
+
+const Header = function() {
+
+  const handleClick = (anchor) => function() {
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
     if (element) {
@@ -44,7 +60,6 @@ const Header = () => {
       <FontAwesomeIcon icon={social.icon} size="2x" />
     </a>
   ));
-
 
   return (
     <Box
@@ -72,40 +87,20 @@ const Header = () => {
               {socialList}
             </HStack>
           </nav>
+
           <nav>
             <HStack spacing={8}>
               {/* Add links to Projects and Contact me section */}
-              <a href="/#" onClick={handleClick("landing")}>
-                <HStack>
-                  <FontAwesomeIcon icon={faHome} size="lg" />
-                  <Text fontSize={14} fontWeight="bold">
-                    Home
-                  </Text>
-                </HStack>
-              </a>
-              <a href="#project-section" onClick={handleClick("projects")}>
-                <HStack>
-                  <FontAwesomeIcon icon={faBriefcase} size="lg" />
-                  <Text fontSize={14} fontWeight="bold">
-                    Projects
-                  </Text>
-                </HStack>
-              </a>
-              <a href="#contactme-section" onClick={handleClick("contactme")}>
-                <HStack>
-                  <FontAwesomeIcon icon={faEnvelope} size="lg" />
-                  <Text fontSize={14} fontWeight="bold">
-                    Contact Me
-                  </Text>
-                </HStack>
-              </a>
-
-
+              <NavItem href="#" onClick={handleClick("landing")} icon={faHome} text="Home" />
+              <NavItem href="#project-section" onClick={handleClick("projects")} icon={faToolbox} text="Projects" />
+              <NavItem href="#contactme-section" onClick={handleClick("contactme")} icon={faEnvelope} text="Context me" />
             </HStack>
           </nav>
+
         </HStack>
       </Box>
     </Box>
   );
 };
+
 export default Header;
