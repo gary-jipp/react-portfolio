@@ -54,7 +54,7 @@ const NavItem = function(props) {
     <>
       <a href={props.href} onClick={props.onClick}>
         <HStack>
-          {/* <FontAwesomeIcon icon={props.icon} size="lg" /> */}
+          <FontAwesomeIcon icon={props.icon} size="1x" />
           <Text fontSize={14} fontWeight="bold">
             {props.text}
           </Text>
