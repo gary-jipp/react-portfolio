@@ -29,22 +29,22 @@ const socials = [
 
 const internals = [
   {
-    anchor: "home",
+    anchor: "landing",
     icon: faHome,
-    path: "#",
+    path: "/#",
     text: "Home",
   },
   {
     anchor: "projects",
     icon: faToolbox,
-    path: "#project-section",
+    path: "/#projects",
     text: "Projects",
   },
   {
     anchor: "contactme",
     icon: faEnvelope,
-    path: "#contactme-section",
-    text: "Context me",
+    path: "/#contactme",
+    text: "Contact me",
   },
 ];
 
@@ -65,7 +65,6 @@ const NavItem = function(props) {
 };
 
 const Header = function() {
-
   const handleClick = (anchor) => function() {
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
