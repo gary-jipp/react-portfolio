@@ -68,14 +68,14 @@ const Header = function() {
   const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const prevScrollY = useRef(0);
 
-  const handleClick = (anchor) => function() {
+  const handleClick = (anchor) => function(e) {
+    e.preventDefault();  // Prevent href from snapping to view too fast
     const id = `${anchor}-section`;
+    console.log("Scroll to:  ", id);
+
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      window.scrollTo({top: element.offsetTop, behavior: "smooth"});
     }
   };
 
