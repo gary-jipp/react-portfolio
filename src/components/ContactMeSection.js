@@ -29,7 +29,7 @@ const ContactMeSection = () => {
       comment: ""
     },
     onSubmit: async (values, {setSubmitting, resetForm}) => {
-      await submit("https://api/contactme", values);
+      await submit("/api/contactme", values);
       setSubmitting(false);
     },
     validationSchema: Yup.object({
@@ -42,10 +42,10 @@ const ContactMeSection = () => {
 
   useEffect(() => {
     if (response) {
-    onOpen(response.type, response.message);
-    if (response.type === "success") {
-      formik.resetForm(); // Reset the form if submission was successful
-    }
+      onOpen(response.type, response.message);
+      if (response.type === "success") {
+        formik.resetForm(); // Reset the form if submission was successful
+      }
     }
   }, [response]);
 
@@ -79,9 +79,11 @@ const ContactMeSection = () => {
                 <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
 
+              {/* Inquiry Type Field */}
               <FormControl isInvalid={formik.touched.type && !!formik.errors.type}>
                 <FormLabel htmlFor="type">Type of enquiry</FormLabel>
-                <Select id="type" name="type" {...formik.getFieldProps("type")}>
+                <Select id="type" name="type" {...formik.getFieldProps("type") }>
+                  <option value="">Select an option ...</option>
                   <option value="hireMe">Freelance project proposal</option>
                   <option value="openSource">Open source consultancy session</option>
                   <option value="other">Other</option>
