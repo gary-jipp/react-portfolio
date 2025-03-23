@@ -65,7 +65,7 @@ const NavItem = function(props) {
 };
 
 const Header = function() {
-  const [isHeaderHidden, setIsHeaderHidden] = useState(true);
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const prevScrollY = useRef(0);
 
   const handleClick = (anchor) => function() {
@@ -115,7 +115,7 @@ const Header = function() {
       right={0}
       transform={`translateY(${isHeaderHidden ? "-200px" : 0})`}
       transitionProperty="transform"
-      transitionDuration=".3s"
+      transitionDuration=".4s"
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
     >
