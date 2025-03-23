@@ -76,6 +76,16 @@ const Header = function() {
     }
   };
 
+  const handleScroll = function() {
+    console.log("Scroll");
+
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, {passive: true});
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Create list of Social Network links
   const socialList = socials.map((social) => (
     <a href={social.url} key={social.url}>
