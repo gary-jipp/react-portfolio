@@ -1,4 +1,4 @@
-import {useEffect, useRef} from "react";
+import {useState, useEffect, useRef} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faHome, faToolbox} from "@fortawesome/free-solid-svg-icons";
 import {faGithub, faLinkedin, faMedium, faStackOverflow} from "@fortawesome/free-brands-svg-icons";
@@ -65,6 +65,9 @@ const NavItem = function(props) {
 };
 
 const Header = function() {
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const prevScrollY = useRef(0);
+
   const handleClick = (anchor) => function() {
     const id = `${anchor}-section`;
     const element = document.getElementById(id);
@@ -76,9 +79,12 @@ const Header = function() {
     }
   };
 
-  const handleScroll = function() {
-    console.log("Scroll");
+  const handleScroll = function(e) {
+    const scrollY = window.scrollY;
+    console.log("Scroll", prevScrollY.current, "->", scrollY);
 
+
+    prevScrollY.current = scrollY;
   };
 
   useEffect(() => {
@@ -118,8 +124,7 @@ const Header = function() {
         <HStack px={16} py={4} justifyContent="space-between" alignItems="center">
           <nav>
             {/* Add social media links based on the `socials` data */}
-            <HStack spacing={8} // color={!isHeaderVisible ? "transparent" : "#2A4365"}
-            >
+            <HStack spacing={8}>
               {socialList}
             </HStack>
           </nav>
