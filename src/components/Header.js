@@ -65,7 +65,7 @@ const NavItem = function(props) {
 };
 
 const Header = function() {
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [isHeaderHidden, setIsHeaderHidden] = useState(true);
   const prevScrollY = useRef(0);
 
   const handleClick = (anchor) => function() {
@@ -79,11 +79,10 @@ const Header = function() {
     }
   };
 
+  // Determine which dirction the window is scrolling
   const handleScroll = function(e) {
     const scrollY = window.scrollY;
-    console.log("Scroll", prevScrollY.current, "->", scrollY);
-
-
+    setIsHeaderHidden(scrollY > prevScrollY.current);
     prevScrollY.current = scrollY;
   };
 
@@ -92,9 +91,9 @@ const Header = function() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Create list of Social Network links
+  // Create list of Social Network links (open in a new window)
   const socialList = socials.map((social) => (
-    <a href={social.url} key={social.url}>
+    <a href={social.url} key={social.url} target="_blank" rel="noopener noreferrer">
       <FontAwesomeIcon icon={social.icon} size="2x" />
     </a>
   ));
@@ -114,7 +113,7 @@ const Header = function() {
       top={0}
       left={0}
       right={0}
-      translateY={0}
+      transform={`translateY(${isHeaderHidden ? "-200px" : 0})`}
       transitionProperty="transform"
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
